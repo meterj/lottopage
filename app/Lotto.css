@@ -1,0 +1,433 @@
+/* Lotto.css - Premium V2 Matrix Theme */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Core Colors */
+  --bg-darker: #020205;
+  --bg-panel: rgba(10, 10, 15, 0.75);
+  --gold-neon: #ffde37;
+  --gold-glow: rgba(255, 222, 55, 0.4);
+  --accent-blue: #00f2ff;
+  --accent-purple: #9d00ff;
+  
+  /* Status Colors */
+  --color-hot: #ff4d4d;
+  --color-cold: #4d94ff;
+  
+  /* Glass Effects */
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shine: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+  
+  /* Spacing & Radii */
+  --radius-xl: 40px;
+  --radius-lg: 20px;
+  --gap-md: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+body {
+  background-color: var(--bg-darker);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+/* --- Matrix / Space Background --- */
+.lotto-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #0a0a1f 0%, #020205 100%);
+}
+
+/* Floating Neon Orbs */
+.lotto-container::before,
+.lotto-container::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.15;
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+.lotto-container::before {
+  width: 40vw;
+  height: 40vw;
+  background: var(--accent-purple);
+  top: -10%;
+  left: -10%;
+}
+
+.lotto-container::after {
+  width: 50vw;
+  height: 50vw;
+  background: var(--accent-blue);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(10%, 15%) scale(1.1); }
+}
+
+/* --- Main Panel (Glassmorphism V2) --- */
+.main-panel {
+  position: relative;
+  z-index: 10;
+  background: var(--bg-panel);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 60px;
+  width: 100%;
+  max-width: 860px;
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+  animation: panelSlideUp 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes panelSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Typography --- */
+h1 {
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -3px;
+  margin-bottom: 8px;
+  background: linear-gradient(to bottom, #fff 30%, var(--gold-neon) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255, 222, 55, 0.3));
+}
+
+.sub-title {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* --- Input Fields (BirthDate) --- */
+.input-group {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.input-label {
+  font-size: 0.9rem;
+  color: var(--gold-neon);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.birth-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 25px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s;
+  cursor: text;
+}
+
+.birth-input:focus {
+  border-color: var(--gold-neon);
+  box-shadow: 0 0 15px var(--gold-glow);
+  background: rgba(255,255,255,0.08);
+}
+
+/* --- Buttons --- */
+.start-btn {
+  background: var(--gold-neon);
+  color: #000;
+  border: none;
+  padding: 18px 50px;
+  border-radius: 100px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 30px var(--gold-glow);
+}
+
+.start-btn:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(255, 222, 55, 0.6);
+  background: #fff;
+}
+
+.start-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+/* --- Loading Matrix --- */
+.loading-overlay {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.matrix-spinner {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 30px;
+  border: 4px solid rgba(255,255,255,0.1);
+  border-top-color: var(--gold-neon);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  filter: drop-shadow(0 0 10px var(--gold-neon));
+}
+
+.matrix-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--gold-neon);
+  letter-spacing: 2px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* --- Result V2 Layout --- */
+.result-card {
+  width: 100%;
+}
+
+.sets-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.set-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  transition: 0.3s;
+}
+
+.set-row:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateX(8px);
+}
+
+.set-tag {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: 50px;
+}
+
+.ball-group {
+  display: flex;
+  gap: 8px;
+}
+
+.ball-v2 {
+  width: 40px;
+  height: 40px;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ball-v2.hot { border-color: var(--color-hot); color: var(--color-hot); }
+.ball-v2.cold { border-color: var(--color-cold); color: var(--color-cold); }
+
+.ball-v2::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--glass-shine);
+  pointer-events: none;
+}
+
+/* Suggestion Box V2 */
+.suggestion-v2 {
+  background: linear-gradient(135deg, rgba(255,222,55,0.1) 0%, rgba(0,242,255,0.05) 100%);
+  border: 1px solid rgba(255,222,55,0.2);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.destiny-msg {
+  font-size: 0.9rem;
+  color: var(--gold-neon);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.suggestion-row {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 8px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+/* Reset Button V2 */
+.reset-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  padding: 12px 30px;
+  border-radius: 100px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.reset-btn:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  border-color: #fff;
+}
+
+/* --- 범례(Legend) 설명 박스 --- */
+.legend-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: left;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.65);
+}
+
+.legend-item strong {
+  color: #fff;
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border: 2px solid;
+}
+
+.legend-dot.hot-dot {
+  border-color: var(--color-hot);
+  background: rgba(255, 77, 77, 0.15);
+}
+
+.legend-dot.cold-dot {
+  border-color: var(--color-cold);
+  background: rgba(77, 148, 255, 0.15);
+}
+
+/* --- 동행복권 링크 버튼 --- */
+.dhlottery-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dhlottery-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #1a3a6a, #0d2040);
+  border: 1px solid rgba(100, 160, 255, 0.3);
+  border-radius: 100px;
+  color: #7ec8ff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 80, 200, 0.2);
+  cursor: pointer !important;
+}
+
+.dhlottery-btn:hover {
+  background: linear-gradient(135deg, #2a5aaa, #1a3a6a);
+  border-color: rgba(100, 160, 255, 0.7);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 80, 200, 0.4);
+}
+
+.dhlottery-btn-secondary {
+  background: linear-gradient(135deg, #2a1a4a, #1a0d30);
+  border-color: rgba(180, 100, 255, 0.3);
+  color: #c87eff;
+}
+
+.dhlottery-btn-secondary:hover {
+  background: linear-gradient(135deg, #4a2a8a, #2a1a5a);
+  border-color: rgba(180, 100, 255, 0.7);
+  color: #fff;
+}
+
+.dhlottery-note {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.3px;
+}
+
+.dhlottery-note strong {
+  color: rgba(255, 255, 255, 0.55);
+}
+
