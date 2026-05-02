@@ -215,8 +215,8 @@ export default function Home() {
   useCanvasBalls(canvasRef, profiles);
 
   useEffect(() => {
-    const storageKey = "lotto-v2-visitor-number";
-    const savedNumber = window.localStorage.getItem(storageKey);
+    const storageKey = "lotto-v2-session-visitor-number";
+    const savedNumber = window.sessionStorage.getItem(storageKey);
 
     if (savedNumber) {
       setVisitorNumber(savedNumber);
@@ -228,7 +228,7 @@ export default function Home() {
       .then((data) => {
         const nextNumber = String(data.value ?? "");
         if (!nextNumber) return;
-        window.localStorage.setItem(storageKey, nextNumber);
+        window.sessionStorage.setItem(storageKey, nextNumber);
         setVisitorNumber(nextNumber);
       })
       .catch(() => {
