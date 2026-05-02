@@ -147,7 +147,7 @@ const useCanvasBalls = (canvasRef, profiles) => {
           radius: 22 + Math.random() * 52,
           speed: 0.14 + Math.random() * 0.36,
           phase: Math.random() * Math.PI * 2,
-          alpha: 0.34 + Math.random() * 0.36,
+          alpha: 0.56 + Math.random() * 0.34,
         });
       }
     };
@@ -165,14 +165,14 @@ const useCanvasBalls = (canvasRef, profiles) => {
         const gradient = ctx.createRadialGradient(x - ball.radius * 0.28, ball.y - ball.radius * 0.35, ball.radius * 0.1, x, ball.y, ball.radius);
         gradient.addColorStop(0, "rgba(255,255,255,0.92)");
         gradient.addColorStop(0.22, ballFill(ball.value));
-        gradient.addColorStop(1, "rgba(8,13,28,0.36)");
+        gradient.addColorStop(1, "rgba(8,13,28,0.18)");
         ctx.globalAlpha = ball.alpha;
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(x, ball.y, ball.radius, 0, Math.PI * 2);
         ctx.fill();
         ctx.globalAlpha = ball.alpha * 0.82;
-        ctx.fillStyle = "#101522";
+        ctx.fillStyle = "#0b0f18";
         ctx.font = `800 ${Math.max(15, ball.radius * 0.38)}px Inter, sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
