@@ -71,6 +71,7 @@ a {
 .brand,
 .nav-links,
 .hero-actions,
+.header-right,
 .generator-top,
 .balance {
   display: flex;
@@ -109,8 +110,23 @@ a {
   text-decoration: underline;
 }
 
-.header-action {
+.header-right {
   justify-self: end;
+  gap: 12px;
+}
+
+.visitor-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .primary-button,
@@ -717,6 +733,12 @@ h3 {
     min-height: 42px;
     padding: 0 14px;
     font-size: 12px;
+  }
+
+  .visitor-badge {
+    min-height: 30px;
+    padding: 0 9px;
+    font-size: 11px;
   }
 
   h1 {

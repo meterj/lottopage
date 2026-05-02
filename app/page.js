@@ -207,11 +207,34 @@ export default function Home() {
   const profiles = useMemo(() => buildProfiles(), []);
   const [sets, setSets] = useState(() => Array.from({ length: 5 }, () => createSmartSet(profiles)));
   const [rolling, setRolling] = useState(false);
+  const [visitorNumber, setVisitorNumber] = useState(null);
   const firstSet = sets[0];
   const odd = firstSet.numbers.filter((number) => number % 2).length;
   const sum = firstSet.numbers.reduce((total, number) => total + number, 0);
 
   useCanvasBalls(canvasRef, profiles);
+
+  useEffect(() => {
+    const storageKey = "lotto-v2-visitor-number";
+    const savedNumber = window.localStorage.getItem(storageKey);
+
+    if (savedNumber) {
+      setVisitorNumber(savedNumber);
+      return;
+    }
+
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/meterj-lottopage-lotto-v2-visits")
+      .then((response) => response.json())
+      .then((data) => {
+        const nextNumber = String(data.value ?? "");
+        if (!nextNumber) return;
+        window.localStorage.setItem(storageKey, nextNumber);
+        setVisitorNumber(nextNumber);
+      })
+      .catch(() => {
+        setVisitorNumber("확인 중");
+      });
+  }, []);
 
   useEffect(() => {
     const revealObserver = new IntersectionObserver(
@@ -251,7 +274,12 @@ export default function Home() {
           <a href="#start">추천기</a>
           <a href="#flow">로직</a>
         </nav>
-        <button className="header-action" type="button" onClick={scrollToStart}>번호 뽑기</button>
+        <div className="header-right">
+          <span className="visitor-badge" aria-live="polite">
+            {visitorNumber ? `${visitorNumber}번째 방문자` : "방문 번호 확인 중"}
+          </span>
+          <button className="header-action" type="button" onClick={scrollToStart}>번호 뽑기</button>
+        </div>
       </header>
 
       <main id="top">
