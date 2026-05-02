@@ -63,8 +63,8 @@ a {
   align-items: center;
   height: 64px;
   padding: 0 clamp(16px, 3vw, 32px);
-  color: var(--white);
-  background: rgba(37, 40, 43, 0.72);
+  color: var(--charcoal);
+  background: rgba(244, 246, 248, 0.86);
   backdrop-filter: blur(10px);
 }
 
@@ -120,10 +120,10 @@ a {
   align-items: center;
   min-height: 34px;
   padding: 0 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(37, 40, 43, 0.16);
   border-radius: 999px;
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--charcoal);
+  background: rgba(255, 255, 255, 0.72);
   font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
@@ -163,8 +163,8 @@ a {
   min-height: 40px;
   padding: 8px 16px;
   border-radius: 24px;
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--charcoal);
+  background: rgba(37, 40, 43, 0.08);
   font-size: 14px;
   font-weight: 700;
 }
@@ -175,8 +175,10 @@ a {
   min-height: 100svh;
   overflow: hidden;
   isolation: isolate;
-  color: var(--white);
-  background: var(--charcoal);
+  color: var(--charcoal);
+  background:
+    radial-gradient(circle at 78% 18%, rgba(230, 0, 0, 0.08), transparent 28%),
+    linear-gradient(135deg, #f8fafc 0%, #eef2f6 55%, #dde5ee 100%);
 }
 
 #lottoCanvas {
@@ -193,7 +195,7 @@ a {
   inset: 0;
   z-index: -1;
   content: "";
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .hero-content {
@@ -266,7 +268,8 @@ h3 {
   padding: 20px;
   border-radius: 6px;
   color: var(--charcoal);
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 50px rgba(37, 40, 43, 0.12);
 }
 
 .draw-panel p {
