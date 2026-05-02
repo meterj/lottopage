@@ -207,7 +207,9 @@ export default function Home() {
   const profiles = useMemo(() => buildProfiles(), []);
   const [sets, setSets] = useState(() => Array.from({ length: 5 }, () => createSmartSet(profiles)));
   const [rolling, setRolling] = useState(false);
-  const [visitorNumber, setVisitorNumber] = useState(null);
+  const [visitorNumber, setVisitorNumber] = useState(() =>
+    typeof window === "undefined" ? null : window.sessionStorage.getItem("lotto-v2-session-visitor-number")
+  );
   const firstSet = sets[0];
   const odd = firstSet.numbers.filter((number) => number % 2).length;
   const sum = firstSet.numbers.reduce((total, number) => total + number, 0);
@@ -216,12 +218,7 @@ export default function Home() {
 
   useEffect(() => {
     const storageKey = "lotto-v2-session-visitor-number";
-    const savedNumber = window.sessionStorage.getItem(storageKey);
-
-    if (savedNumber) {
-      setVisitorNumber(savedNumber);
-      return;
-    }
+    if (window.sessionStorage.getItem(storageKey)) return;
 
     fetch("https://countapi.mileshilliard.com/api/v1/hit/meterj-lottopage-lotto-v2-visits")
       .then((response) => response.json())
